@@ -27,7 +27,7 @@
 
 # 📖📖 OOP school library: decorate a class <a name="about-project"></a>
 
-**In this project, you will use the Decorator design pattern to correct the names of people.**
+**In this project, I will use the Decorator design pattern to correct the names of people.**
 
 
 
