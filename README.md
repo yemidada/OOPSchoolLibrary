@@ -44,9 +44,9 @@ The various stacks used for the project includes the following
 
 ### Key Features <a name="key-features"></a>
 
+- **Implement classes and objects in Ruby.**
+- **Implement encapsulation and inheritance with Ruby.**
 - **Run a program using the command line.**
-- **Use Ruby syntax for basic programming operations.**
-- **Use Ruby to solve basic coding challenges.**
 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
