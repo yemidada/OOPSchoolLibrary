@@ -27,7 +27,7 @@
 
 # 📖📖 OOP school library: set up associations <a name="about-project"></a>
 
-**In this project, I am going to finish creating the remaining classes for our school library and create the associations between them.**
+**In this project, I will create a form of UI for your school library app. This way it can be invoked as an executable and not something you use in IRB exclusively.**
 
 
 
@@ -44,7 +44,7 @@ The various stacks used for the project includes the following
 
 ### Key Features <a name="key-features"></a>
 
-- **Implement composition (as an example of the design pattern).**
+- **Build interactive console apps.**
 - **Run a program using the command line.**
 
 

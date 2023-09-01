@@ -8,7 +8,6 @@ class Person < Nameable
 
   def initialize(id, name = 'Unknown', age = 0, parent_permission: true)
     super()
-
     @id = id
     @name = name
     @age = age
@@ -32,7 +31,7 @@ class Person < Nameable
     of_age? || @parent_permission
   end
 
-  def add_rental(book, date)
-    Rental.new(book, self, date)
+  def add_rental(rental)
+    @rentals << rental
   end
 end
