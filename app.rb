@@ -121,16 +121,17 @@ class App
   def add_person_general(create_person, age, name)
     id = Time.now.to_i
 
+
     case create_person
     when '1'
       puts 'Has parent permission? [Y/N]:'
       permission = gets.chomp
       is_permissed = permission.downcase == 'y'
-      people.push(Student.new(id, age, name, is_permissed))
+      people.push(Student.new(id, name, age, is_permissed))
     when '2'
       puts 'Specialization:'
       specialization = gets.chomp
-      people.push(Teacher.new(id, specialization, age, name))
+      people.push(Teacher.new(id, specialization, name, age)) 
     end
   end
 end
