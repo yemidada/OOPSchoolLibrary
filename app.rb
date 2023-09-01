@@ -121,7 +121,6 @@ class App
   def add_person_general(create_person, age, name)
     id = Time.now.to_i
 
-
     case create_person
     when '1'
       puts 'Has parent permission? [Y/N]:'
@@ -131,7 +130,7 @@ class App
     when '2'
       puts 'Specialization:'
       specialization = gets.chomp
-      people.push(Teacher.new(id, specialization, name, age)) 
+      people.push(Teacher.new(id, specialization, name, age))
     end
   end
 end
