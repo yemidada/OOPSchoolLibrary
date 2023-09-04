@@ -2,7 +2,7 @@
 
 
 <div align="center">
-  <h3><b>📖 OOP school library: decorate a class </b></h3>
+  <h3><b>📖 OOP school library: add basic UI</b></h3>
 
 </div>
 
@@ -25,9 +25,9 @@
 - [📝 License](#license)
 
 
-# 📖📖 OOP school library: decorate a class <a name="about-project"></a>
+# 📖📖 OOP school library: add basic UI <a name="about-project"></a>
 
-**In this project, I will use the Decorator design pattern to correct the names of people.**
+**In this project, I will create a form of UI for your school library app. This way it can be invoked as an executable and not something you use in IRB exclusively.**
 
 
 
@@ -44,7 +44,7 @@ The various stacks used for the project includes the following
 
 ### Key Features <a name="key-features"></a>
 
-- **Implement composition (as an example of the design pattern).**
+- **Build interactive console apps.**
 - **Run a program using the command line.**
 
 
