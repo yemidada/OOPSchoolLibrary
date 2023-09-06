@@ -11,7 +11,7 @@ class UserInterface
 
     book_manager.load_from_file
     person_manager.load_from_file
-    rental_manager.load_from_file
+    rental_manager.load_from_file(person_manager.people)
   end
 
   def run
