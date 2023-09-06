@@ -112,53 +112,84 @@ class UserInterface
   def save_data
     people = person_manager.people
     books = book_manager.books
+    saver = Saver.new
 
-    if people.length.positive?
-      json_object = []
-      people.each do |person|
-        json_object.push({
-                           class_name: person.class.name,
-                           id: person.id,
-                           name: person.name,
-                           age: person.age,
-                           parent_permission: defined?(person.parent_permission) ? person.parent_permission : false,
-                           specialization: defined?(person.specialization) ? person.specialization : ''
-                         })
-      end
-      File.write('people.json', json_object.to_json)
-    end
+    saver.save_person(people) if people.length.positive?
 
-    if books.length.positive?
-      json_object = []
-      books.each do |book|
-        json_object.push({
-                           title: book.title,
-                           author: book.author
-                         })
-      end
-      File.write('books.json', json_object.to_json)
-    end
+    saver.save_book(books) if books.length.positive?
 
     return unless people.length.positive?
 
+    saver.save_rental(people)
+  end
+end
+
+class Serialize
+  def serialize_person(person)
+    {
+      class_name: person.class.name,
+      id: person.id,
+      name: person.name,
+      age: person.age,
+      parent_permission: defined?(person.parent_permission) ? person.parent_permission : false,
+      specialization: defined?(person.specialization) ? person.specialization : ''
+    }
+  end
+
+  def serialize_book(book)
+    {
+      title: book.title,
+      author: book.author
+    }
+  end
+
+  def serialize_rental(per)
+    {
+      person: {
+        class_name: per.person.class.name,
+        id: per.person.id,
+        name: per.person.name,
+        age: per.person.age,
+        parent_permission: per.person.parent_permission,
+        specialization: per.person.instance_of?(::Teacher) ? per.person.specialization : ''
+      },
+      book: {
+        title: per.book.title,
+        author: per.book.author
+      },
+      date: per.date
+    }
+  end
+end
+
+class Saver
+  attr_accessor :serializer
+
+  def initialize
+    @serializer = Serialize.new
+  end
+
+  def save_person(people)
+    json_object = []
+    people.each do |person|
+      json_object.push(serializer.serialize_person(person))
+    end
+    File.write('people.json', json_object.to_json)
+  end
+
+  def save_book(books)
+    json_object = []
+    books.each do |book|
+      json_object.push(serializer.serialize_book(book))
+    end
+    File.write('books.json', json_object.to_json)
+  end
+
+  def save_rental(people)
     json_object = []
     people.each do |person|
       person.rentals.each do |per|
-        json_object.push({
-                           person: {
-                             class_name: per.person.class.name,
-                             id: per.person.id,
-                             name: per.person.name,
-                             age: per.person.age,
-                             parent_permission: per.person.parent_permission,
-                             specialization: per.person.instance_of?(::Teacher) ? per.person.specialization : ''
-                           },
-                           book: {
-                             title: per.book.title,
-                             author: per.book.author
-                           },
-                           date: per.date
-                         })
+        json_object.push(serializer.serialize_rental(per))
       end
     end
     File.write('rentals.json', json_object.to_json)
