@@ -1,6 +1,7 @@
 require './book'
 require 'pry'
 require 'json'
+
 class BookManager
   attr_reader :books
 
