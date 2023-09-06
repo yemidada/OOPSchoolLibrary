@@ -9,7 +9,7 @@ class RentalManager
     return unless File.exist?('rentals.json')
     json_rentals = File.read('rentals.json') == '' ? [] : File.read('rentals.json')
     puts json_rentals
-    binding.pry
+    # binding.pry
     json_rentals.each do |rental|
       Rental.new(rental['book'], rental['person'], rental['date'])
     end

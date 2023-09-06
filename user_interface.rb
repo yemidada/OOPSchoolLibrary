@@ -1,4 +1,5 @@
 require 'json'
+require 'pry'
 
 class UserInterface
   attr_reader :book_manager, :person_manager, :rental_manager
@@ -116,26 +117,26 @@ class UserInterface
       json_object = []
       people.each do |person|
         json_object.push({
-          "class_name": person.class.name,
-          "id": person.id,
-          "name": person.name,
-          "age": person.age,
-          "parent_permission": defined?(person.parent_permission) ? person.parent_permission : false,
-          "specialization": defined?(person.specialization) ? person.specialization : ""
+          class_name: person.class.name,
+          id: person.id,
+          name: person.name,
+          age: person.age,
+          parent_permission: defined?(person.parent_permission) ? person.parent_permission : false,
+          specialization: defined?(person.specialization) ? person.specialization : ""
         })
       end
-      File.open('people.json', 'w') { |file| file.write(json_object.to_json) }
+      File.write('people.json', json_object.to_json)
     end
 
     if books.length > 0
       json_object = []
       books.each do |book|
         json_object.push({
-          "title": book.title,
-          "author": book.author
+          title: book.title,
+          author: book.author
         })
       end
-      File.open('books.json', 'w') { |file| file.write(json_object.to_json) }
+      File.write('books.json', json_object.to_json)
     end
 
     if people.length > 0
@@ -158,7 +159,7 @@ class UserInterface
           })
         end
       end
-      File.open('rentals.json', 'w') { |file| file.write(json_object.to_json) }
+      File.write('rentals.json',json_object.to_json)
     end
 
   end 

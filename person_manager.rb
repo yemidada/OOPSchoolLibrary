@@ -1,6 +1,7 @@
 require './person'
 require './teacher'
 require './student'
+require 'json'
 
 class PersonManager
   attr_reader :people
@@ -13,7 +14,7 @@ class PersonManager
   def load_from_file
     return unless File.exist?('people.json')
     json_people = File.read('people.json') == '' ? [] : File.read('people.json')
-    json_people.each do |person|
+    JSON.parse(json_people).map do |person|
       if person['class_name'] == 'Student'
         people.push(Student.new(person['id'], person['name'], person['age'], person['is_permissed']))
       else
