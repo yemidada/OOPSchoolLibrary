@@ -161,5 +161,5 @@ class UserInterface
       File.open('rentals.json', 'w') { |file| file.write(json_object.to_json) }
     end
 
-  end
+  end 
 end

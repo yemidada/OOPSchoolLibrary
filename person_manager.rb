@@ -11,11 +11,8 @@ class PersonManager
   end
 
   def load_from_file
-
-    json_people = File.open('people.json') do |file|
-      defined?(file.read) ? JSON.parse(file.read) : []
-    end
-
+    return unless File.exist?('people.json')
+    json_people = File.read('people.json') == '' ? [] : File.read('people.json')
     json_people.each do |person|
       if person['class_name'] == 'Student'
         people.push(Student.new(person['id'], person['name'], person['age'], person['is_permissed']))
