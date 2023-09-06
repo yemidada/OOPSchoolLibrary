@@ -105,11 +105,17 @@ After you clone this repo to your desktop and install the dependencies, go to it
 ## 👥 Authors <a name="authors"></a>
 
 
-👤 **Author**
+👤 **Yemidada**
 
 - GitHub: [@yemidada](https://github.com/yemidada)
 - Twitter: [@nairareport](https://twitter.com/nairareport)
 - LinkedIn: [yemidada](https://linkedin.com/in/yemidada)
+
+👤 **Benedict Makomo**
+
+- GitHub: [Github](https://github.com/BenM4k)
+- Twitter: [Twitter](https://twitter.com/______ANOMALY)
+- LinkedIn: [LinkedIn](https://www.linkedin.com/in/benedict-makomo/)
 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>

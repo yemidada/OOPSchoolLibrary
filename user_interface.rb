@@ -8,12 +8,12 @@ class UserInterface
   end
 
   def run
-    list_of_question = on_questions;
+    list_of_question = on_questions
     on_question_answer(list_of_question)
     run
   end
 
-  def get_user_input
+  def user_input
     puts '-------------------------------------------'
     puts "Welcome to School Library Application!\n\n"
     puts "Please choose an opinion by entering a number!\n"
@@ -85,7 +85,6 @@ class UserInterface
 
     puts 'Date:'
     date = gets.chomp
-
 
     rental_manager.add_rental(book_manager.books[book_index.to_i], person_manager.people[person_index.to_i], date)
 

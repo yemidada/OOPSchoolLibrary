@@ -24,7 +24,7 @@ class PersonManager
       people.push(Teacher.new(id, specialization, name, age))
     end
   end
-    
+
   def list_people
     people.each do |person|
       puts "[#{person.class.name}] ID: #{person.id} Name: #{person.name} Age: #{person.age}"
