@@ -7,6 +7,22 @@ class PersonManager
 
   def initialize
     @people = []
+    
+  end
+
+  def load_from_file
+
+    json_people = File.open('people.json') do |file|
+      defined?(file.read) ? JSON.parse(file.read) : []
+    end
+
+    json_people.each do |person|
+      if person['class_name'] == 'Student'
+        people.push(Student.new(person['id'], person['name'], person['age'], person['is_permissed']))
+      else
+        people.push(Teacher.new(person['id'], person['specialization'], person['name'], person['age']))
+      end
+    end
   end
 
   def add_person(type, name, age)
@@ -24,7 +40,7 @@ class PersonManager
       people.push(Teacher.new(id, specialization, name, age))
     end
   end
-    
+
   def list_people
     people.each do |person|
       puts "[#{person.class.name}] ID: #{person.id} Name: #{person.name} Age: #{person.age}"

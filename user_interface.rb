@@ -1,3 +1,5 @@
+require 'json'
+
 class UserInterface
   attr_reader :book_manager, :person_manager, :rental_manager
 
@@ -5,15 +7,19 @@ class UserInterface
     @book_manager = book_manager
     @person_manager = person_manager
     @rental_manager = rental_manager
+
+    book_manager.load_from_file
+    person_manager.load_from_file
+    rental_manager.load_from_file
   end
 
   def run
-    list_of_question = on_questions;
+    list_of_question = on_questions
     on_question_answer(list_of_question)
     run
   end
 
-  def get_user_input
+  def user_input
     puts '-------------------------------------------'
     puts "Welcome to School Library Application!\n\n"
     puts "Please choose an opinion by entering a number!\n"
@@ -42,7 +48,8 @@ class UserInterface
     when '6'
       on_list_rental_by_person
     else
-      abort('bye! Thank you for using this application')
+      save_data
+      abort("Data has been stored in their respected files.\n bye! Thank you for using this application")
     end
   end
 
@@ -86,7 +93,6 @@ class UserInterface
     puts 'Date:'
     date = gets.chomp
 
-
     rental_manager.add_rental(book_manager.books[book_index.to_i], person_manager.people[person_index.to_i], date)
 
     puts 'Rental created successfully'
@@ -100,5 +106,60 @@ class UserInterface
     person.rentals.each do |per|
       puts "[#{per.date}] Book: #{per.book.title} by #{per.book.author}"
     end
+  end
+
+  def save_data
+    people = person_manager.people
+    books = book_manager.books
+
+    if people.length > 0
+      json_object = []
+      people.each do |person|
+        json_object.push({
+          "class_name": person.class.name,
+          "id": person.id,
+          "name": person.name,
+          "age": person.age,
+          "parent_permission": defined?(person.parent_permission) ? person.parent_permission : false,
+          "specialization": defined?(person.specialization) ? person.specialization : ""
+        })
+      end
+      File.open('people.json', 'w') { |file| file.write(json_object.to_json) }
+    end
+
+    if books.length > 0
+      json_object = []
+      books.each do |book|
+        json_object.push({
+          "title": book.title,
+          "author": book.author
+        })
+      end
+      File.open('books.json', 'w') { |file| file.write(json_object.to_json) }
+    end
+
+    if people.length > 0
+      json_object = []
+      people.each do |person|
+        person.rentals.each do |per|
+          json_object.push({
+            "person": {
+              "class_name": per.class.name,
+              "id": per.id,
+              "name": per.name,
+              "age": per.age,
+              "parent_permission": per.parent_permission,
+              "specialization": per.specialization
+            },
+            "book": {
+              "title": per.title,
+              "author": per.author
+            },
+          })
+        end
+      end
+      File.open('rentals.json', 'w') { |file| file.write(json_object.to_json) }
+    end
+
   end
 end
