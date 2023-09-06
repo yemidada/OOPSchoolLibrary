@@ -10,7 +10,8 @@ class BookManager
 
   def load_from_file
     return unless File.exist?('books.json')
-    json_books = File.read('books.json') == "" ? [] : File.read('books.json')
+
+    json_books = File.empty?('books.json') ? [] : File.read('books.json')
     JSON.parse(json_books).map do |book|
       books.push(Book.new(book['title'], book['author']))
     end

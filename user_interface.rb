@@ -113,55 +113,54 @@ class UserInterface
     people = person_manager.people
     books = book_manager.books
 
-    if people.length > 0
+    if people.length.positive?
       json_object = []
       people.each do |person|
         json_object.push({
-          class_name: person.class.name,
-          id: person.id,
-          name: person.name,
-          age: person.age,
-          parent_permission: defined?(person.parent_permission) ? person.parent_permission : false,
-          specialization: defined?(person.specialization) ? person.specialization : ""
-        })
+                           class_name: person.class.name,
+                           id: person.id,
+                           name: person.name,
+                           age: person.age,
+                           parent_permission: defined?(person.parent_permission) ? person.parent_permission : false,
+                           specialization: defined?(person.specialization) ? person.specialization : ''
+                         })
       end
       File.write('people.json', json_object.to_json)
     end
 
-    if books.length > 0
+    if books.length.positive?
       json_object = []
       books.each do |book|
         json_object.push({
-          title: book.title,
-          author: book.author
-        })
+                           title: book.title,
+                           author: book.author
+                         })
       end
       File.write('books.json', json_object.to_json)
     end
 
-    if people.length > 0
-      json_object = []
-      people.each do |person|
-        person.rentals.each do |per|
-          json_object.push({
-            "person": {
-              "class_name": per.person.class.name,
-              "id": per.person.id,
-              "name": per.person.name,
-              "age": per.person.age,
-              "parent_permission": per.person.parent_permission,
-              "specialization": per.person.class.name == 'Teacher' ? per.person.specialization : ''
-            },
-            "book": {
-              "title": per.book.title,
-              "author": per.book.author
-            },
-            "date": per.date
-          })
-        end
-      end
-      File.write('rentals.json',json_object.to_json)
-    end
+    return unless people.length.positive?
 
-  end 
+    json_object = []
+    people.each do |person|
+      person.rentals.each do |per|
+        json_object.push({
+                           person: {
+                             class_name: per.person.class.name,
+                             id: per.person.id,
+                             name: per.person.name,
+                             age: per.person.age,
+                             parent_permission: per.person.parent_permission,
+                             specialization: per.person.instance_of?(::Teacher) ? per.person.specialization : ''
+                           },
+                           book: {
+                             title: per.book.title,
+                             author: per.book.author
+                           },
+                           date: per.date
+                         })
+      end
+    end
+    File.write('rentals.json', json_object.to_json)
+  end
 end

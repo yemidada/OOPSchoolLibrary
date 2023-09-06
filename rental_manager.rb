@@ -5,10 +5,10 @@ require 'pry'
 require 'json'
 
 class RentalManager
-
   def load_from_file(people)
     return unless File.exist?('rentals.json')
-    json_rentals = File.read('rentals.json') == '' ? [] : File.read('rentals.json')
+
+    json_rentals = File.empty?('rentals.json') ? [] : File.read('rentals.json')
     # binding.pry
     JSON.parse(json_rentals).map do |rental|
       book = rental['book']
@@ -16,7 +16,7 @@ class RentalManager
       add_rental(Book.new(book['title'], book['author']), person, rental['date'])
     end
   end
-  
+
   def add_rental(book, person, date)
     Rental.new(book, person, date)
   end
