@@ -145,17 +145,18 @@ class UserInterface
         person.rentals.each do |per|
           json_object.push({
             "person": {
-              "class_name": per.class.name,
-              "id": per.id,
-              "name": per.name,
-              "age": per.age,
-              "parent_permission": per.parent_permission,
-              "specialization": per.specialization
+              "class_name": per.person.class.name,
+              "id": per.person.id,
+              "name": per.person.name,
+              "age": per.person.age,
+              "parent_permission": per.person.parent_permission,
+              "specialization": per.person.class.name == 'Teacher' ? per.person.specialization : ''
             },
             "book": {
-              "title": per.title,
-              "author": per.author
+              "title": per.book.title,
+              "author": per.book.author
             },
+            "date": per.date
           })
         end
       end
