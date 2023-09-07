@@ -7,6 +7,7 @@ require 'json'
 class RentalManager
   def load_from_file(people)
     return unless File.exist?('rentals.json')
+
     json_rentals = File.empty?('rentals.json') ? [] : File.read('rentals.json')
     # binding.pry
     JSON.parse(json_rentals).map do |rental|

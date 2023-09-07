@@ -15,7 +15,7 @@ describe Person do
   end
 
   it 'can add rentals' do
-    rental = double('Rental') 
+    rental = double('Rental')
 
     person.add_rental(rental)
 
