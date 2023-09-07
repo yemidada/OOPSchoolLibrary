@@ -1,15 +1,12 @@
 class Solver
   def factorial(num)
-    'Input must be a non-negative integer' if num.negative?
-
-    1 if num.zero?
-
-    result = 1
-    (1..num).each do |i|
-      result *= i
+    if num.negative?
+      raise ArgumentError, 'Input must be a non-negative integer'
+    elsif num.zero?
+      1
+    else
+      (1..num).reduce(:*)
     end
-
-    result
   end
 
   def reverse(char)

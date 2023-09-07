@@ -11,6 +11,11 @@ describe Solver do
       num = 5
       expect(solver.factorial(num)).to eq(120)
     end
+
+    it 'Should raise an Argument Error' do
+      num = -5
+      expect { solver.factorial(num) }.to raise_error(ArgumentError, 'Input must be a non-negative integer')
+    end
   end
 
   context 'When checking FizzBuzz' do
