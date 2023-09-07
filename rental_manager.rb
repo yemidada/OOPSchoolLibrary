@@ -9,7 +9,6 @@ class RentalManager
       defined?(file.read) ? JSON.parse(file.read) : []
     end
     json_rentals.each do |rental|
-      
       Rental.new(rental['book'], rental['person'], rental['date'])
     end
   end
