@@ -1,4 +1,4 @@
-require_relative '../classroom'
+require_relative '../book'
 
 describe Book do
   it "has a title and author" do
