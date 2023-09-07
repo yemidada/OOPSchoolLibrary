@@ -38,8 +38,8 @@ describe Solver do
   context 'When reversing a string' do
     it 'should take an input string and reverse it' do
       my_str = 'name'
-      reverse_str = 'eman'
-      expect(solver.reverse_str(my_str)).to eq(reverse_str)
+      reversed_str = 'eman'
+      expect(solver.reverse(my_str)).to eq(reversed_str)
     end
   end
 end
