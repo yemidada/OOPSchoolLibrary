@@ -31,7 +31,7 @@ describe Solver do
 
         it "Should return the number" do
             num = 4
-            expect(solver.fizzbuzz(num)).to eq(4)
+            expect(solver.fizzbuzz(num)).to eq("4")
         end
     end
 
