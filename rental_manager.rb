@@ -1,18 +1,21 @@
 require './rental'
 require './book'
 require './person'
+require 'pry'
+require 'json'
 
 class RentalManager
-
-  def load_from_file
-    json_rentals = File.open('rentals.json') do |file|
-      defined?(file.read) ? JSON.parse(file.read) : []
-    end
-    json_rentals.each do |rental|
-      Rental.new(rental['book'], rental['person'], rental['date'])
+  def load_from_file(people)
+    return unless File.exist?('rentals.json')
+    json_rentals = File.empty?('rentals.json') ? [] : File.read('rentals.json')
+    # binding.pry
+    JSON.parse(json_rentals).map do |rental|
+      book = rental['book']
+      person = people.find { |per| per.id == rental['person']['id'] }
+      add_rental(Book.new(book['title'], book['author']), person, rental['date'])
     end
   end
-  
+
   def add_rental(book, person, date)
     Rental.new(book, person, date)
   end

@@ -1,4 +1,7 @@
 require './book'
+require 'pry'
+require 'json'
+
 class BookManager
   attr_reader :books
 
@@ -7,10 +10,10 @@ class BookManager
   end
 
   def load_from_file
-    json_books = File.open('books.json') do |file|
-      defined?(file.read) ? JSON.parse(file.read) : []
-    end
-    json_books.each do |book|
+    return unless File.exist?('books.json')
+
+    json_books = File.empty?('books.json') ? [] : File.read('books.json')
+    JSON.parse(json_books).map do |book|
       books.push(Book.new(book['title'], book['author']))
     end
   end
